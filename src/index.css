@@ -1,1 +1,347 @@
 @import "tailwindcss";
+
+@theme {
+  --font-display: "Unbounded", "Golos Text", sans-serif;
+  --font-body: "Golos Text", "Segoe UI", sans-serif;
+
+  --color-paper: #f1f3ec;
+  --color-card: #fbfcf7;
+  --color-ink: #1b2a23;
+  --color-pine: #1e4d3b;
+  --color-pinedeep: #142f25;
+  --color-pinesoft: #2c6b50;
+  --color-moss: #33815c;
+  --color-mint: #dce9d9;
+  --color-amber: #efa92e;
+  --color-ambersoft: #fbebc6;
+  --color-amberdeep: #8a5a10;
+  --color-coral: #d9503f;
+  --color-coralsoft: #f7dcd4;
+  --color-coraldeep: #8a2e22;
+  --color-line: #d7decf;
+  --color-muted: #64735f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(239, 169, 46, 0.45);
+}
+
+/* лёгкая «бумажная» фактура поверх всего */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- сцена: многослойный фон ---------- */
+.bg-scene {
+  background-color: #f1f3ec;
+  background-image:
+    radial-gradient(rgba(27, 42, 35, 0.075) 1px, transparent 1.4px),
+    radial-gradient(720px 420px at 88% -6%, rgba(239, 169, 46, 0.14), transparent 62%),
+    radial-gradient(860px 560px at -12% 104%, rgba(30, 77, 59, 0.11), transparent 60%);
+  background-size:
+    22px 22px,
+    auto,
+    auto;
+  background-attachment: fixed;
+}
+
+.pine-texture {
+  background-image:
+    radial-gradient(rgba(245, 247, 239, 0.09) 1px, transparent 1.4px),
+    radial-gradient(420px 320px at 110% 0%, rgba(239, 169, 46, 0.16), transparent 60%);
+  background-size:
+    18px 18px,
+    auto;
+}
+
+/* ---------- «флэш-карточки» ---------- */
+.fcard {
+  background: #fbfcf7;
+  border: 1.5px solid #1b2a23;
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 #1b2a23;
+}
+.fcard-hover {
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+.fcard-hover:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #1b2a23;
+}
+
+/* ---------- кнопки ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.15;
+  border: 1.5px solid #1b2a23;
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  box-shadow: 3px 3px 0 #1b2a23;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+.btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #1b2a23;
+}
+.btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #1b2a23;
+}
+.btn:disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+.btn-pine {
+  background: #1e4d3b;
+  color: #f2f5ec;
+}
+.btn-pine:hover {
+  background: #256049;
+}
+.btn-amber {
+  background: #efa92e;
+  color: #1b2a23;
+}
+.btn-amber:hover {
+  background: #f5b84a;
+}
+.btn-ghost {
+  background: #fbfcf7;
+  color: #1b2a23;
+}
+.btn-danger {
+  background: #f7dcd4;
+  color: #8a2e22;
+}
+.btn-dark {
+  background: #1b2a23;
+  color: #f2f5ec;
+  box-shadow: 3px 3px 0 rgba(239, 169, 46, 0.9);
+}
+.btn-dark:hover {
+  box-shadow: 4px 4px 0 rgba(239, 169, 46, 0.9);
+}
+.btn-sm {
+  padding: 0.34rem 0.6rem;
+  font-size: 0.78rem;
+  border-radius: 0.45rem;
+  box-shadow: 2px 2px 0 #1b2a23;
+}
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 1.5px solid #1b2a23;
+  border-radius: 0.5rem;
+  background: #fbfcf7;
+  color: #1b2a23;
+  box-shadow: 2px 2px 0 #1b2a23;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+  cursor: pointer;
+}
+.icon-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 #1b2a23;
+  background: #fbebc6;
+}
+.icon-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0 0 0 #1b2a23;
+}
+
+/* ---------- поля ---------- */
+.inp {
+  width: 100%;
+  background: #ffffff;
+  border: 1.5px solid #1b2a23;
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  color: #1b2a23;
+  outline: none;
+  transition:
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+.inp:focus {
+  border-color: #1e4d3b;
+  box-shadow: 0 0 0 3px rgba(239, 169, 46, 0.4);
+}
+.inp::placeholder {
+  color: #93a08e;
+}
+
+/* ---------- «маркер» ---------- */
+.hl {
+  background-image: linear-gradient(to top, rgba(239, 169, 46, 0.55) 0 34%, transparent 34%);
+  padding: 0 0.12em;
+}
+
+/* ---------- появление при скролле ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- анимации ---------- */
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.965);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.anim-pop {
+  animation: pop-in 0.26s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.anim-rise {
+  animation: rise-in 0.32s ease both;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.anim-toast {
+  animation: toast-in 0.25s ease both;
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+.anim-pulse {
+  animation: pulse-soft 1.7s ease-in-out infinite;
+}
+
+@keyframes grow-bar {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+.bar-grow {
+  transform-origin: bottom;
+  animation: grow-bar 0.65s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+@keyframes fill-line {
+  from {
+    width: 0;
+  }
+}
+.line-grow {
+  animation: fill-line 0.9s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+/* ---------- флэш-карточка (переворот) ---------- */
+.flip-card {
+  perspective: 900px;
+}
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.3, 0.9, 0.3, 1);
+}
+.flip-card.flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+/* ---------- скроллбар ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(27, 42, 35, 0.22);
+  border-radius: 999px;
+  border: 2px solid #f1f3ec;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(27, 42, 35, 0.4);
+}
